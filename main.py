@@ -13,7 +13,6 @@ import nltk
 nltk.download('popular', quiet=True) # for downloading packages
 from nltk import sent_tokenize, word_tokenize
 from nltk.stem import WordNetLemmatizer
-
 # uncomment the following only the first time
 #nltk.download('punkt') # first-time use only
 #nltk.download('wordnet') # first-time use only
@@ -47,13 +46,14 @@ def greeting(sentence):
             return random.choice(GREETING_RESPONSES)
 
 
-# Generating response
+# Generating chatbot response
 def response(sent_tokens,user_response):
     robo_response=''
     sent_tokens.append(user_response)
 
     TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
-    tfidf = TfidfVec.fit_transform(sent_tokens)
+    tfidf = TfidfVec.fit_transform(sent_tokens) #inputs sentence tokens
+    # computes the lexical distance between our user message and each element in tfidf (determines similarity b/w user input and dataset)
     vals = cosine_similarity(tfidf[-1], tfidf)
     idx=vals.argsort()[0][-2]
     flat = vals.flatten()
@@ -67,7 +67,6 @@ def response(sent_tokens,user_response):
         return robo_response
 
 def chatbot():
-  #Reading in the corpus
   f=open('chatbot.txt','r')
   raw = f.read().lower()
   sent_tokens, word_tokens=preProcess(raw)
