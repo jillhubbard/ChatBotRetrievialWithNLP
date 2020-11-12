@@ -1,5 +1,8 @@
-#Retrieval based chatbot leveraging NLP
-
+##################
+#YOUR NAME:
+#Retrieval based chatbot utilzing NLP 
+# Source: https://medium.com/analytics-vidhya/building-a-simple-chatbot-in-python-using-nltk-7c8c8215ac6e
+#################
 import random
 import string # to process standard python strings
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -84,3 +87,4 @@ def chatbot():
             sent_tokens.remove(user_response)
 
 chatbot()
+
